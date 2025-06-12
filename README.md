@@ -1,6 +1,6 @@
 # Dual-branch Mamba based multi-label Anuran species classification
 
-**Authors:** Yuji Wang, Jie Xie, Mingying Zhu, Juan Gabriel Colonna
+**Authors:** Yuji Wang, Mingying Zhu, Juan Gabriel Colonna, Jie Xie* 
 
 In this paper, we propose a novel multi-label audio classification framework for anuran call recognition. Combining CNN-based feature extraction with a dual-branch Mamba module, our proposed model can effectively capture the complex and multi-dimensional characteristics of anuran vocalizations. The use of MM, CBAM, and ZLPRLoss can further improve the classification performance.
 
