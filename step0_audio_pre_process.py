@@ -52,7 +52,7 @@ def apply_random_augmentation(signal):
     return aug_func(signal)
 
 if __name__ == '__main__':
-    ANURASET_DIR = r'C:\Users\nnu-xj-group-Tom\Desktop\anuraset'
+    ANURASET_DIR = r'anuraset'
 
     AUDIO_DIR = os.path.join(ANURASET_DIR, 'audio')
 
