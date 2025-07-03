@@ -12,7 +12,7 @@ with open('config.yaml', 'r') as file:
     cfg = yaml.safe_load(file)
 
 if __name__ == '__main__':
-    AUGMENTED_ANURASET_DIR = r'C:\Users\nnu-xj-group-Tom\Desktop\anuraset-Tom\augmented_audio_and_metadata_file'
+    AUGMENTED_ANURASET_DIR = r'anuraset-Tom\augmented_audio_and_metadata_file'
 
     TRAIN_ANNOTATIONS_FILE = os.path.join(AUGMENTED_ANURASET_DIR, 'metadata_augmented.csv')
     TEST_ANNOTATIONS_FILE = os.path.join(AUGMENTED_ANURASET_DIR, 'metadata_test.csv')
