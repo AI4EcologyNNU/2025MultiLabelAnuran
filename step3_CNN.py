@@ -60,19 +60,19 @@ class CNN(nn.Module):
         # CNN module
         self.conv = nn.Sequential(
             # Input size: [batch_size, 1, 128, 376]
-            nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 32, 128, 376]
+            nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
             nn.Dropout(0.1), # [batch_size, 32, 64, 188]
 
-            nn.Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 64, 64, 188]
+            nn.Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
             nn.Dropout(0.2), # [batch_size, 64, 32, 94]
 
-            nn.Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 128, 32, 94]
+            nn.Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(128),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
@@ -247,7 +247,7 @@ if __name__ == '__main__':
         make_sure_path_exists(save_results_path)
 
         for epoch in range(1, cfg['epochs'] + 1):
-            print(f'fold {fold + 1} epoch {epoch + 1}')
+            print(f'fold {fold + 1} epoch {epoch}')
             # train
             training_loss, training_f1 = train(model, training_loader, optimizer, loss_fn, metric_fn, cfg['device'])
             # validation
