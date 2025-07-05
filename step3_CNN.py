@@ -104,12 +104,12 @@ class CNN(nn.Module):
         #     expand=2,
         # )
 
-        self.fc = nn.Linear(256 * 2, num_classes)  # 双向LSTM，输出维度为 hidden_size * 2
+        self.fc = nn.Linear(256 * 2, num_classes)
 
     def forward(self, x):
         x = self.conv(x)
         x = self.cbam(x)
-        x = x.permute(0, 3, 1, 2).reshape(x.size(0), x.size(3), -1) # 这里x的形状是 (batch_size, channels, height, width)，需要变换成(batch_size, time_steps, features)以适配LSTM
+        x = x.permute(0, 3, 1, 2).reshape(x.size(0), x.size(3), -1)
         # x = self.mamba(x) # before LSTM
         x, _ = self.rnn(x)
         # x = self.mamba(x) # after LSTM
@@ -124,19 +124,19 @@ class CNNDualMamba(nn.Module):
 
         self.conv = nn.Sequential(
             # Input shape: [batch_size, 1, 128, 376]
-            nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 32, 128, 376]
+            nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
             nn.Dropout(0.1),  # [batch_size, 32, 64, 188]
 
-            nn.Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 64, 64, 188]
+            nn.Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
             nn.Dropout(0.2),  # [batch_size, 64, 32, 94]
 
-            nn.Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),  # 输出: [batch_size, 128, 32, 94]
+            nn.Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.BatchNorm2d(128),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
@@ -266,10 +266,8 @@ if __name__ == '__main__':
                 torch.save(model.state_dict(), os.path.join(save_results_path, f'model_{fold + 1}.bin'))
                 print(f'Model checkpoint saved at ./model_{fold + 1}.bin')
                 best_validation_f1 = validation_f1
-
-        # best_model = CRNN(num_classes=36).to(cfg['device'])
+                
         best_model = CNNDualMamba(num_classes=36).to(cfg['device'])
-        # best_model = CRNNFake2DMamba(num_classes=36).to(cfg['device'])
         best_model.load_state_dict(torch.load(os.path.join(save_results_path, f'model_{fold + 1}.bin')))
 
         show_loss(np.array(training_loss_list), np.array(validation_loss_list), save_results_path)
