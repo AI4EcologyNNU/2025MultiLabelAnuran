@@ -10,8 +10,6 @@ import torch.nn.functional as F
 from mamba_ssm import Mamba
 from einops import rearrange
 from torch.optim import AdamW
-# from torchvision import models
-# from efficientnet_pytorch import EfficientNet
 from torch.optim.lr_scheduler import OneCycleLR
 from torchmetrics.classification import MultilabelF1Score
 
